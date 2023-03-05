@@ -1302,6 +1302,12 @@ defm : UnsupportedSchedZabha;
 defm : UnsupportedSchedZbc;
 defm : UnsupportedSchedZbkb;
 defm : UnsupportedSchedZbkx;
+defm : UnsupportedSchedZbe;
+defm : UnsupportedSchedZbf;
+defm : UnsupportedSchedZbm;
+defm : UnsupportedSchedZbp;
+defm : UnsupportedSchedZbr;
+defm : UnsupportedSchedZbt;
 defm : UnsupportedSchedZfa;
 defm : UnsupportedSchedZvk;
 }
