@@ -5103,7 +5103,9 @@ void DAGTypeLegalizer::ExpandIntRes_XMULO(SDNode *N,
 
   Type *RetTy = VT.getTypeForEVT(*DAG.getContext());
   EVT PtrRangeVT = TLI.getPointerRangeTy(DAG.getDataLayout());
-  Type *PtrTy = PtrRangeVT.getTypeForEVT(*DAG.getContext());
+  EVT PtrVT = TLI.getPointerTy(DAG.getDataLayout(),
+                               DAG.getDataLayout().getProgramAddressSpace());
+  Type *PtrTy = PtrVT.getTypeForEVT(*DAG.getContext());
 
   // Replace this with a libcall that will check overflow.
   RTLIB::Libcall LC = RTLIB::UNKNOWN_LIBCALL;
@@ -5152,7 +5154,8 @@ void DAGTypeLegalizer::ExpandIntRes_XMULO(SDNode *N,
 
   // Also pass the address of the overflow check.
   Entry.Node = Temp;
-  Entry.Ty = PointerType::getUnqual(PtrTy->getContext());
+  Entry.Ty =
+      PointerType::get(PtrTy, DAG.getDataLayout().getProgramAddressSpace());
   Entry.IsSExt = true;
   Entry.IsZExt = false;
   Args.push_back(Entry);
